@@ -20,7 +20,9 @@
                   </a>
 
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      @if(authservice.isAdmin()){
                         <li><a class="dropdown-item" routerLink="/add-cours">Ajouter</a></li>
+                        }
                         <li><a class="dropdown-item" routerLink="/cours">Lister</a></li>
                         <li><a class="dropdown-item" routerLink="/rechercheParSection">Recherche par section</a></li>
                         <li><a class="dropdown-item" routerLink="/rechercheParNom">Recherche par Nom</a></li>
@@ -32,12 +34,18 @@
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button"
                       data-bs-toggle="dropdown" aria-expanded="false">
-                      [username]
+                      [{{authservice.loggedUser}}]
                   </a>
 
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
-                      <li><a class="dropdown-item" href="#">Login</a></li>
-                      <li><a class="dropdown-item" href="#">Logout</a></li>
+
+                      @if(!authservice.isloggedin){ 
+          
+                      <li><a class="dropdown-item" routerLink="/login">Login</a></li>
+                      }
+                      @else{
+                      <li><a class="dropdown-item" (click) = "onLogout()">logout</a></li>
+                      }
                       <li><a class="dropdown-item" href="#">Profile</a></li>
                   </ul>
               </li>
